@@ -20,6 +20,7 @@ type linkedList struct {
 func main() {
 	//creating linkedList
 	linkedList := linkedList{}
+
 	//adding values
 	linkedList.add(1)
 	linkedList.add(2)
@@ -29,17 +30,26 @@ func main() {
 
 	//printing whole list
 	fmt.Println(linkedList)
+	//printing list length
+	fmt.Println("LinkedList length", linkedList.length)
+
 	//getting value
 	fmt.Println(linkedList.get(3))
+
 	//removing values
 	linkedList.remove(3)
 	linkedList.remove(5)
+	//printing list length
+	fmt.Println("LinkedList length", linkedList.length)
 	//printing list after removing values
 	fmt.Println(linkedList)
+
 	//removing first node
 	linkedList.remove(1)
 	//printing list after removing values
 	fmt.Println(linkedList)
+	//printing list length
+	fmt.Println("LinkedList length", linkedList.length)
 }
 
 func (l *linkedList) add(value int) {
@@ -56,6 +66,7 @@ func (l *linkedList) add(value int) {
 		}
 		iterator.next = newNode //pass the node reference
 	}
+	l.length++
 }
 
 func (l *linkedList) remove(value int) {
@@ -66,8 +77,10 @@ func (l *linkedList) remove(value int) {
 		if current.value == value {
 			if current == l.head { //case the node to remove is the first of the linkedList
 				l.head = current.next
+				l.length--
 			} else { //other nodes
 				previous.next = current.next
+				l.length--
 				return
 			}
 		}
